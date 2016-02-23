@@ -9,17 +9,22 @@ import javax.servlet.http.HttpServletResponse;
 public class SearchServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String PARAM_KEYWORD = "keyword";
+	public static final String PARAM_DIRECTORY = "directory";
+	public static final String PARAM_ALGORITHM = "algorithm";
+
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String searchWord = request.getParameter("searchWord");
-		String directory = request.getParameter("directory");
-		String algorithm = request.getParameter("algorithm");
+		String searchWord = request.getParameter(PARAM_KEYWORD);
+		String directory = request.getParameter(PARAM_DIRECTORY);
+		String algorithm = request.getParameter(PARAM_ALGORITHM);
 
 		response.getWriter()
-			.append("Search word: ")
+			.append("Keyword: ")
 			.append(searchWord)
 			.append("<br/>")
 			.append("Directory: ")

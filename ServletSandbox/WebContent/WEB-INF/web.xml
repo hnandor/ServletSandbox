@@ -1,8 +1,19 @@
 <web-app>
+
+	<servlet>
+		<servlet-name>StartServlet</servlet-name>
+		<servlet-class>com.nhuszka.web.servlet.StartServlet</servlet-class>
+	</servlet>
+
 	<servlet>
 		<servlet-name>SearchServlet</servlet-name>
 		<servlet-class>com.nhuszka.web.servlet.SearchServlet</servlet-class>
 	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>StartServlet</servlet-name>
+		<url-pattern>/StartServlet</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>SearchServlet</servlet-name>
@@ -13,4 +24,4 @@
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
-</web-app>  
+</web-app>
