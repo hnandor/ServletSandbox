@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<form action="SearchServlet" method="post">
+			Search word:
+			<input type="text" name="searchWord" />
+			<br/>
+			<br/>
+			 
+			Directory:
+			<input type="text" name="directory" />
+			<br/>
+			<br/>
+			
+			Algorithm: 
+			<!-- TODO: Generate the selector dynamically (Algorithm enum) -->
+			<select name="algorithm">
+				<option value="singleThread">Single thread</option>
+				<option value="parallel">Parallel</option>
+				<option value="forkJoin">Fork/Join</option>
+			</select> 
+			<br/>
+			<br/>
+			
+			<input type="submit" value="Search" />
+		</form>
+	</body>
+</html>
