@@ -1,6 +1,6 @@
 package com.nhuszka.web.page;
 
-import com.nhuszka.web.bean.SearchAlgorithm;
+import com.nhuszka.web.algorithm.SearchAlgorithm;
 import com.nhuszka.web.servlet.SearchServlet;
 
 public class SearchPage implements Page {
