@@ -4,20 +4,15 @@ import java.io.File;
 import java.util.Collection;
 
 import com.nhuszka.web.algorithm.recursive_single_thread.FileSearcher;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
-public class StartRecursiveSingleThreadFileSearcher {
+class StartRecursiveSingleThreadFileSearcher implements FileSearchStarter {
 
-	public static String SEARCH_TEXT;
-	public static String SEARCH_EXTENSION;
-	private static String ROOT_DIRECTORY;
-
-	public static Collection<File> run(String root, String searchText, String extension) {
-		ROOT_DIRECTORY = root;
-		SEARCH_TEXT = searchText;
-		SEARCH_EXTENSION = extension;
-
+	@Override
+	public Collection<File> run(SearchCriteria searchCriteria) {
 		long startTime = System.currentTimeMillis();
-		Collection<File> files = new FileSearcher().search(new File(ROOT_DIRECTORY));
+		Collection<File> files = new FileSearcher(searchCriteria)
+				.search(new File(searchCriteria.getDirectory()));
 		for (File file : files) {
 			System.out.println(file.getAbsolutePath());
 		}

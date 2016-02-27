@@ -7,13 +7,14 @@ import java.util.Collection;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
 
-import com.nhuszka.web.algorithm.StartParallelFileSearcher;
 import com.nhuszka.web.algorithm.shared.FilesWithLogs;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
 public class DirectorySearcherParallelTask extends AbstractFileSearcherTask {
 
-	public DirectorySearcherParallelTask(File file, FilesWithLogs filesWithLogs, CyclicBarrier barrier) {
-		super(file, filesWithLogs, barrier);
+	public DirectorySearcherParallelTask(File file, FilesWithLogs filesWithLogs, CyclicBarrier barrier,
+			SearchCriteria criteria) {
+		super(file, filesWithLogs, barrier, criteria);
 	}
 
 	@Override
@@ -24,14 +25,14 @@ public class DirectorySearcherParallelTask extends AbstractFileSearcherTask {
 		int numOfSubFiles = dirs.size() + subFiles.size();
 		CyclicBarrier myBarrier = new CyclicBarrier(numOfSubFiles + 1);
 
-		StartParallelFileSearcher.log("Wait for threads in " + file.getAbsolutePath(), filesWithLogs);
+		log("Wait for threads in " + file.getAbsolutePath(), filesWithLogs);
 
 		for (File dir : dirs) {
-			new Thread(new DirectorySearcherParallelTask(dir, filesWithLogs, myBarrier)).start();
+			new Thread(new DirectorySearcherParallelTask(dir, filesWithLogs, myBarrier, criteria)).start();
 		}
 
 		for (File subFile : subFiles) {
-			new Thread(new FileReaderSingleTask(subFile, filesWithLogs, myBarrier)).start();
+			new Thread(new FileReaderSingleTask(subFile, filesWithLogs, myBarrier, criteria)).start();
 		}
 
 		try {
@@ -41,7 +42,7 @@ public class DirectorySearcherParallelTask extends AbstractFileSearcherTask {
 		} catch (BrokenBarrierException e) {
 			e.printStackTrace();
 		}
-		StartParallelFileSearcher.log("Sub threads are done in " + file.getAbsolutePath(), filesWithLogs);
+		log("Sub threads are done in " + file.getAbsolutePath(), filesWithLogs);
 		signDone();
 	}
 
@@ -58,7 +59,6 @@ public class DirectorySearcherParallelTask extends AbstractFileSearcherTask {
 	}
 
 	private FileFilter createFileFilter() {
-		return file -> !file.isDirectory()
-				&& file.getName().endsWith(StartParallelFileSearcher.SEARCH_EXTENSION);
+		return file -> !file.isDirectory() && file.getName().endsWith(criteria.getExtension());
 	}
 }

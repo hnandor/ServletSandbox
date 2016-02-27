@@ -6,9 +6,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import com.nhuszka.web.algorithm.StartRecursiveSingleThreadFileSearcher;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
 public class DirectorySearcher implements Searcher {
+
+	private SearchCriteria criteria;
+
+	public DirectorySearcher(SearchCriteria criteria) {
+		this.criteria = criteria;
+	}
 
 	@Override
 	public Collection<File> search(File file) {
@@ -18,7 +24,7 @@ public class DirectorySearcher implements Searcher {
 		}
 
 		for (File subFile : getSubFiles(file)) {
-			files.addAll(new ConcreteFileSearcher().search(subFile));
+			files.addAll(new ConcreteFileSearcher(criteria).search(subFile));
 		}
 		return files;
 	}
@@ -36,6 +42,6 @@ public class DirectorySearcher implements Searcher {
 	}
 
 	private FileFilter createFileFilter() {
-		return file -> !file.isDirectory() && file.getName().endsWith(StartRecursiveSingleThreadFileSearcher.SEARCH_EXTENSION);
+		return file -> !file.isDirectory() && file.getName().endsWith(criteria.getExtension());
 	}
 }

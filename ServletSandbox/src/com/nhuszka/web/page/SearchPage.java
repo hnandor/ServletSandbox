@@ -10,31 +10,31 @@ public class SearchPage implements Page {
 		StringBuilder startPageHtml = new StringBuilder();
 
 		startPageHtml
-		.append("<html>")
-		.append("<body>")
-		.append("<form action='").append("SearchServlet").append("' method='post' >")
-		.append("Search word:")
-		.append("<input type='text' name='").append(SearchServlet.PARAM_KEYWORD).append("' />")
-		.append("<br/>")
-		.append("<br/>")
-		.append("Directory:")
-		.append("<input type='text' name='").append(SearchServlet.PARAM_DIRECTORY).append("' />")
-		.append("<br/>")
-		.append("<br/>")
-		.append("Extension:")
-		.append("<input type='text' name='").append(SearchServlet.PARAM_EXTENSION).append("' />")
-		.append("<br/>")
-		.append("<br/>")
-		.append("Algorithm: ");
+				.append("<html>")
+				.append("<body>")
+				.append("<form action='").append("SearchServlet").append("' method='post' >")
+				.append("Search word:")
+				.append("<input type='text' name='").append(SearchServlet.PARAM_KEYWORD).append("' />")
+				.append("<br/>")
+				.append("<br/>")
+				.append("Directory:")
+				.append("<input type='text' name='").append(SearchServlet.PARAM_DIRECTORY).append("' />")
+				.append("<br/>")
+				.append("<br/>")
+				.append("Extension:")
+				.append("<input type='text' name='").append(SearchServlet.PARAM_EXTENSION).append("' />")
+				.append("<br/>")
+				.append("<br/>")
+				.append("Algorithm: ");
 
 		startPageHtml.append(getAlgorithmSelectorHTML());
 
 		startPageHtml.append("<br/>")
-		.append("<br/>")
-		.append("<input type='submit' value='Search' />")
-		.append("</form>")
-		.append("</body>")
-		.append("</html>");
+				.append("<br/>")
+				.append("<input type='submit' value='Search' />")
+				.append("</form>")
+				.append("</body>")
+				.append("</html>");
 
 		return startPageHtml.toString();
 	}

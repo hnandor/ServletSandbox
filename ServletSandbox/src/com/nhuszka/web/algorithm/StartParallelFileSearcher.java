@@ -1,49 +1,33 @@
 package com.nhuszka.web.algorithm;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import com.nhuszka.web.algorithm.parallel.GenericFileSearcherTask;
 import com.nhuszka.web.algorithm.shared.FilesWithLogs;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
-public class StartParallelFileSearcher {
+class StartParallelFileSearcher implements FileSearchStarter {
 
-	public static String SEARCH_TEXT;
-	public static String SEARCH_EXTENSION;
-	private static String ROOT_DIRECTORY;
-	static long startTime;
+	@Override
+	public Collection<File> run(SearchCriteria searchCriteria) {
+		long startTime = System.currentTimeMillis();
+		final FilesWithLogs filesWithLogs = FilesWithLogs.createSharedFileContainer();
+		final CyclicBarrier barrier = new CyclicBarrier(2, getReadFilesAndLogsAction(filesWithLogs, startTime));
 
-	public static void log(String str, FilesWithLogs files) {
-		files.log(str);
-	}
+		final String directory = searchCriteria.getDirectory();
+		log("Start MAIN thread to search in " + directory + "\n", filesWithLogs);
 
-	public static Collection<File> run(String root, String searchText, String extension) {
-		ROOT_DIRECTORY = root;
-		SEARCH_TEXT = searchText;
-		SEARCH_EXTENSION = extension;
-
-		startTime = System.currentTimeMillis();
-		final FilesWithLogs filesWithLogs = createSharedFileContainer();
-		final CyclicBarrier barrier = new CyclicBarrier(2, getReadFilesAndLogsAction(filesWithLogs));
-
-		log("Start MAIN thread to search in " + ROOT_DIRECTORY + "\n", filesWithLogs);
-
-		File rootFile = new File(ROOT_DIRECTORY);
-		GenericFileSearcherTask rootSearcher = new GenericFileSearcherTask(rootFile, filesWithLogs, barrier);
+		File rootFile = new File(directory);
+		GenericFileSearcherTask rootSearcher = new GenericFileSearcherTask(
+				rootFile, filesWithLogs, barrier, searchCriteria);
 		rootSearcher.search();
 
 		return filesWithLogs.getFiles();
 	}
 
-	private static FilesWithLogs createSharedFileContainer() {
-		ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
-		return new FilesWithLogs(new ArrayList<>(), lock);
-	}
-
-	private static Runnable getReadFilesAndLogsAction(final FilesWithLogs filesWithLogs) {
+	private Runnable getReadFilesAndLogsAction(final FilesWithLogs filesWithLogs, long startTime) {
 		return () -> {
 			log("\nWohoo! MAIN thread gets everything!\n", filesWithLogs);
 
@@ -62,5 +46,9 @@ public class StartParallelFileSearcher {
 
 			System.out.println("TIME (ms): " + (System.currentTimeMillis() - startTime));
 		};
+	}
+
+	public static void log(String str, FilesWithLogs files) {
+		files.log(str);
 	}
 }

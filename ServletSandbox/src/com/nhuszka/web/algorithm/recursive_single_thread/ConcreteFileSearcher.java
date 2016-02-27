@@ -8,9 +8,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import com.nhuszka.web.algorithm.StartRecursiveSingleThreadFileSearcher;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
 public class ConcreteFileSearcher implements Searcher {
+
+	private SearchCriteria criteria;
+
+	public ConcreteFileSearcher(SearchCriteria criteria) {
+		this.criteria = criteria;
+	}
 
 	@Override
 	public Collection<File> search(File file) {
@@ -25,7 +31,7 @@ public class ConcreteFileSearcher implements Searcher {
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			return reader
 					.lines()
-					.anyMatch(item -> item.contains(StartRecursiveSingleThreadFileSearcher.SEARCH_TEXT));
+					.anyMatch(item -> item.contains(criteria.getKeyword()));
 		} catch (FileNotFoundException e) {
 			// TODO nicer exception handling
 			e.printStackTrace();

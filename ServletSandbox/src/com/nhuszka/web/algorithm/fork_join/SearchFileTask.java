@@ -7,19 +7,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.RecursiveAction;
 
-import com.nhuszka.web.algorithm.StartForkJoinMultiThreadFileSearcher;
 import com.nhuszka.web.algorithm.shared.FilesWithLogs;
+import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
 public class SearchFileTask extends RecursiveAction {
 
 	private static final long serialVersionUID = 1L;
 	private final FilesWithLogs filesWithLogs;
 	private final File file;
+	private final SearchCriteria criteria;
 
-
-	public SearchFileTask(FilesWithLogs filesWithLogs, File file) {
+	public SearchFileTask(FilesWithLogs filesWithLogs, File file, SearchCriteria criteria) {
 		this.filesWithLogs = filesWithLogs;
 		this.file = file;
+		this.criteria = criteria;
 	}
 
 	@Override
@@ -29,7 +30,7 @@ public class SearchFileTask extends RecursiveAction {
 				filesWithLogs.add(file);
 			}
 		} else { // directory
-			DirectorySearchTaskFactory subTaskFactory = new DirectorySearchTaskFactory(filesWithLogs, file);
+			DirectorySearchTaskFactory subTaskFactory = new DirectorySearchTaskFactory(filesWithLogs, file, criteria);
 			invokeAll(subTaskFactory.createSubTasks());
 		}
 	}
@@ -38,7 +39,7 @@ public class SearchFileTask extends RecursiveAction {
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			return reader
 					.lines()
-					.anyMatch(item -> item.contains(StartForkJoinMultiThreadFileSearcher.SEARCH_TEXT));
+					.anyMatch(item -> item.contains(criteria.getKeyword()));
 		} catch (FileNotFoundException e) {
 			// TODO nicer exception handling
 			e.printStackTrace();

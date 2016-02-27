@@ -14,7 +14,12 @@ public class FilesWithLogs {
 	private final Lock writeLock;
 	private final List<String> logs;
 
-	public FilesWithLogs(List<File> files, ReentrantReadWriteLock lock) {
+	public static FilesWithLogs createSharedFileContainer() {
+		ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+		return new FilesWithLogs(new ArrayList<>(), lock);
+	}
+
+	private FilesWithLogs(List<File> files, ReentrantReadWriteLock lock) {
 		this.files = files;
 		this.lock = lock;
 		readLock = lock.readLock();
