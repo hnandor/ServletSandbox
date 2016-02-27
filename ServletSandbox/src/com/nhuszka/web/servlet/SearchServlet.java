@@ -20,10 +20,10 @@ public class SearchServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String PARAM_KEYWORD = "keyword";
-	public static final String PARAM_ROOT = "root";
-	public static final String PARAM_ALGORITHM = "algorithm";
-	public static final String PARAM_EXTENSION = "extension";
+	public static final String PARAM_KEYWORD = "Keyword";
+	public static final String PARAM_ROOT = "Directory/file";
+	public static final String PARAM_ALGORITHM = "Algorithm";
+	public static final String PARAM_EXTENSION = "Extension";
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
