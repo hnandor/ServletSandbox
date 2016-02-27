@@ -12,7 +12,7 @@ class StartRecursiveSingleThreadFileSearcher implements FileSearchStarter {
 	public Collection<File> run(SearchCriteria searchCriteria) {
 		long startTime = System.currentTimeMillis();
 		Collection<File> files = new FileSearcher(searchCriteria)
-				.search(new File(searchCriteria.getDirectory()));
+				.search(new File(searchCriteria.getRoot()));
 		for (File file : files) {
 			System.out.println(file.getAbsolutePath());
 		}

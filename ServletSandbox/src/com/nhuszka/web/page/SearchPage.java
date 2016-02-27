@@ -3,40 +3,32 @@ package com.nhuszka.web.page;
 import com.nhuszka.web.algorithm.SearchAlgorithm;
 import com.nhuszka.web.servlet.SearchServlet;
 
-public class SearchPage implements Page {
+public class SearchPage extends Page {
 
 	@Override
-	public String getHTML() {
-		StringBuilder startPageHtml = new StringBuilder();
+	public String getHTMLBody() {
+		StringBuilder body = new StringBuilder();
 
-		startPageHtml
-				.append("<html>")
-				.append("<body>")
-				.append("<form action='").append("SearchServlet").append("' method='post' >")
-				.append("Search word:")
+		body.append("<form action='").append("SearchServlet").append("' method='post' >")
+				.append("Keyword:")
 				.append("<input type='text' name='").append(SearchServlet.PARAM_KEYWORD).append("' />")
-				.append("<br/>")
-				.append("<br/>")
-				.append("Directory:")
-				.append("<input type='text' name='").append(SearchServlet.PARAM_DIRECTORY).append("' />")
-				.append("<br/>")
-				.append("<br/>")
+				.append(BR).append(BR)
+				.append("Directory/file:")
+				.append("<input type='text' name='").append(SearchServlet.PARAM_ROOT).append("' />")
+				.append(BR).append(BR)
 				.append("Extension:")
 				.append("<input type='text' name='").append(SearchServlet.PARAM_EXTENSION).append("' />")
-				.append("<br/>")
-				.append("<br/>")
+				.append(BR).append(BR)
 				.append("Algorithm: ");
 
-		startPageHtml.append(getAlgorithmSelectorHTML());
+		body.append(getAlgorithmSelectorHTML());
 
-		startPageHtml.append("<br/>")
-				.append("<br/>")
+		body.append(BR)
+				.append(BR)
 				.append("<input type='submit' value='Search' />")
-				.append("</form>")
-				.append("</body>")
-				.append("</html>");
+				.append("</form>");
 
-		return startPageHtml.toString();
+		return body.toString();
 	}
 
 	private String getAlgorithmSelectorHTML() {

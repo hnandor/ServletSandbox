@@ -18,7 +18,7 @@ class StartForkJoinMultiThreadFileSearcher implements FileSearchStarter {
 
 		ForkJoinPool pool = new ForkJoinPool();
 		SearchFileTask searchTask = new SearchFileTask(
-				filesWithLogs, new File(searchCriteria.getDirectory()), searchCriteria);
+				filesWithLogs, new File(searchCriteria.getRoot()), searchCriteria);
 		pool.invoke(searchTask);
 
 		for (File file : filesWithLogs.getFiles()) {

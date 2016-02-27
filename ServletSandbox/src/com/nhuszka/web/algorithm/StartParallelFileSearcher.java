@@ -16,10 +16,10 @@ class StartParallelFileSearcher implements FileSearchStarter {
 		final FilesWithLogs filesWithLogs = FilesWithLogs.createSharedFileContainer();
 		final CyclicBarrier barrier = new CyclicBarrier(2, getReadFilesAndLogsAction(filesWithLogs, startTime));
 
-		final String directory = searchCriteria.getDirectory();
-		log("Start MAIN thread to search in " + directory + "\n", filesWithLogs);
+		final String root = searchCriteria.getRoot();
+		log("Start MAIN thread to search in " + root + "\n", filesWithLogs);
 
-		File rootFile = new File(directory);
+		File rootFile = new File(root);
 		GenericFileSearcherTask rootSearcher = new GenericFileSearcherTask(
 				rootFile, filesWithLogs, barrier, searchCriteria);
 		rootSearcher.search();

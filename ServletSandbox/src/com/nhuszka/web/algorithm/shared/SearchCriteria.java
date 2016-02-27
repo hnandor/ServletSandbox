@@ -2,18 +2,18 @@ package com.nhuszka.web.algorithm.shared;
 
 public class SearchCriteria {
 
-	private String directory;
+	private String root;
 	private String keyword;
 	private String extension;
 
-	public SearchCriteria(String directory, String keyword, String extension) {
-		this.directory = directory;
+	public SearchCriteria(String root, String keyword, String extension) {
+		this.root = root;
 		this.keyword = keyword;
 		this.extension = extension;
 	}
 
-	public String getDirectory() {
-		return directory;
+	public String getRoot() {
+		return root;
 	}
 
 	public String getKeyword() {

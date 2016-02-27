@@ -4,15 +4,12 @@ import java.io.File;
 import java.util.Collection;
 
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
-import com.nhuszka.web.exception.IllegalServletParameterException;
 
 public enum SearchAlgorithm {
 
 	SINGLE_THREAD("Single thread", new StartRecursiveSingleThreadFileSearcher()),
 	PARALLEL("Parallel", new StartParallelFileSearcher()),
 	FORK_JOIN("Fork/join", new StartForkJoinMultiThreadFileSearcher());
-
-	private static String ILLEGAL_ALGORITHM = "Illegal algorithm!";
 
 	private final String description;
 	private final FileSearchStarter searchStarter;
@@ -31,13 +28,7 @@ public enum SearchAlgorithm {
 		return "Algorithm[" + description + "]";
 	}
 
-	public static void checkExistingAlgorithm(String algorithmName) throws IllegalServletParameterException {
-		if (algorithmName == null || algorithmName.isEmpty() || !existsAlgorithm(algorithmName)) {
-			throw new IllegalServletParameterException(ILLEGAL_ALGORITHM);
-		}
-	}
-
-	private static boolean existsAlgorithm(String algorithmName) {
+	public static boolean existsAlgorithm(String algorithmName) {
 		for (SearchAlgorithm algorithm : SearchAlgorithm.values()) {
 			if (algorithm.name().equals(algorithmName)) {
 				return true;
@@ -45,7 +36,7 @@ public enum SearchAlgorithm {
 		}
 		return false;
 	}
-	
+
 	public Collection<File> run(SearchCriteria searchCriteria) {
 		return searchStarter.run(searchCriteria);
 	}

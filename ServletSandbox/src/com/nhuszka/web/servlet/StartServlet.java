@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.nhuszka.web.page.Page;
 import com.nhuszka.web.page.SearchPage;
 
 public class StartServlet extends HttpServlet {
@@ -15,8 +16,8 @@ public class StartServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SearchPage searchPage = new SearchPage();
+		Page searchPage = new SearchPage();
 		
-		response.getWriter().append(searchPage.getHTML());
+		response.getWriter().append(searchPage.generateHTML());
 	}
 }
