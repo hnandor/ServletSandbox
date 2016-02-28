@@ -13,10 +13,27 @@ import com.nhuszka.web.page.SearchPage;
 public class StartServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	
+	public static final String ERROR_MSG = "errorMsg";
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Page searchPage = new SearchPage();
+		response.getWriter().append(searchPage.generateHTML());	
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Page searchPage = new SearchPage(parseErrorAttribute(request));
 		response.getWriter().append(searchPage.generateHTML());
+	}
+	
+	// TODO: validate to not contain script, etc.
+	private String parseErrorAttribute(HttpServletRequest request) {
+		Object errorAttribute = request.getAttribute(ERROR_MSG);
+		if (errorAttribute instanceof String) {
+			return (String) errorAttribute;
+		}
+		return null;
 	}
 }

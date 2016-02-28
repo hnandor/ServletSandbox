@@ -40,8 +40,8 @@ public class SearchServlet extends HttpServlet {
 			Page searchResultPage = new SearchResultPage(searchAlgorithm, searchCriteria);
 			writer.append(searchResultPage.generateHTML());
 		} catch (IllegalServletParameterException ispe) {
-			Page errorPage = new ErrorPage(ispe.getMessage());
-			writer.append(errorPage.generateHTML());
+			request.setAttribute(StartServlet.ERROR_MSG, ispe.getMessage());
+			request.getRequestDispatcher("StartServlet").include(request, response);
 		}
 	}
 }

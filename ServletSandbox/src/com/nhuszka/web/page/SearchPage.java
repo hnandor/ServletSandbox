@@ -4,10 +4,23 @@ import com.nhuszka.web.algorithm.SearchAlgorithm;
 import com.nhuszka.web.servlet.SearchServlet;
 
 public class SearchPage extends Page {
+	
+	private Object errorMessage;
+	
+	public SearchPage() {
+	}
+	
+	public SearchPage(Object errorMessage) {
+		this.errorMessage = errorMessage;
+	}
 
 	@Override
 	public String getHTMLBody() {
 		StringBuilder body = new StringBuilder();
+		
+		if (errorMessage != null) {
+			body.append(errorMessage);
+		}
 
 		body.append("<form action='").append("SearchServlet").append("' method='post' >")
 				.append(TABLE);
