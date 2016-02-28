@@ -29,7 +29,6 @@ public class SearchServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter writer = response.getWriter();
-
 		try {
 			String keyword = SearchServletParameterParser.getKeywordParameter(request);
 			String root = SearchServletParameterParser.getRootParameter(request);

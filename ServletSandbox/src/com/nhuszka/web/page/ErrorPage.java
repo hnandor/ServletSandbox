@@ -10,6 +10,11 @@ public class ErrorPage extends Page {
 	
 	@Override
 	public String getHTMLBody() {
-		return error;
+		StringBuilder body = new StringBuilder();
+		body.append(error).append(BR);
+		body.append("<form action='").append("StartServlet").append("' method='get' >");
+		body.append("<input type='submit' value='Restart' />");
+		body.append("</form>");
+		return body.toString();
 	}
 }

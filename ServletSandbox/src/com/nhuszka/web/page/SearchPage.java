@@ -10,22 +10,45 @@ public class SearchPage extends Page {
 		StringBuilder body = new StringBuilder();
 
 		body.append("<form action='").append("SearchServlet").append("' method='post' >")
-				.append("Keyword:")
+				.append(TABLE);
+		
+		body.append(TR).append(TD).append("Keyword:")
+				.append(TD_END)
+				.append(TD)
 				.append("<input type='text' name='").append(SearchServlet.PARAM_KEYWORD).append("' />")
-				.append(BR).append(BR)
-				.append("Directory/file:")
+				.append(TD_END)
+				.append(TR_END);
+		
+		body.append(TR).append(TD).append("Directory/file:")
+				.append(TD_END)
+				.append(TD)
 				.append("<input type='text' name='").append(SearchServlet.PARAM_ROOT).append("' />")
-				.append(BR).append(BR)
-				.append("Extension:")
+				.append(TD_END);
+		
+		body.append(TR).append(TD).append("Extension:")
+				.append(TD_END)
+				.append(TD)
 				.append("<input type='text' name='").append(SearchServlet.PARAM_EXTENSION).append("' />")
-				.append(BR).append(BR)
-				.append("Algorithm: ");
-
-		body.append(getAlgorithmSelectorHTML());
-
-		body.append(BR)
-				.append(BR)
+				.append(TD_END)
+				.append(TR_END);
+		
+		body.append(TR)
+				.append(TD)
+				.append("Algorithm: ")
+				.append(TD_END)
+				.append(TD)
+				.append(getAlgorithmSelectorHTML())
+				.append(TD_END)
+				.append(TR_END);
+				
+		body.append(TR)
+				.append(TD)
+				.append(TD_END)
+				.append(TD)
 				.append("<input type='submit' value='Search' />")
+				.append(TD_END)
+				.append(TR_END)
+				.append(TABLE_END)
 				.append("</form>");
 
 		return body.toString();

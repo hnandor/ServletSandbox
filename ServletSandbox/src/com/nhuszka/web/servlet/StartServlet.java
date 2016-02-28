@@ -17,7 +17,6 @@ public class StartServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Page searchPage = new SearchPage();
-		
 		response.getWriter().append(searchPage.generateHTML());
 	}
 }

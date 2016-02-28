@@ -18,25 +18,42 @@ public class SearchResultPage extends Page {
 	@Override
 	public String getHTMLBody() {
 		StringBuilder body = new StringBuilder();
-		
+		body.append(TABLE);
 		body.append(getSearchHeader());
+		body.append(TABLE_END);
 		body.append(getSearchResults());
-		
 		return body.toString();
 	}
 	
 	private String getSearchHeader() {
 		StringBuilder searchHeader = new StringBuilder();
-		searchHeader.append("Keyword: ").append(searchCriteria.getKeyword()).append(BR);
-		searchHeader.append("Directory/file: ").append(searchCriteria.getRoot()).append(BR);
-		searchHeader.append("Extension: ").append(searchCriteria.getExtension()).append(BR);
-		searchHeader.append("Algorithm: ").append(searchAlgorithm.getDescription()).append(BR);
+		searchHeader.append(TR)
+			.append(TD).append("Keyword: ").append(TD_END)
+			.append(TD).append(searchCriteria.getKeyword()).append(TD_END);
+		searchHeader.append(TR_END);
+		
+		searchHeader.append(TR)
+			.append(TD).append("Directory/file: ").append(TD_END)
+			.append(TD).append(searchCriteria.getRoot()).append(TD_END);
+		searchHeader.append(TR_END);
+		
+		searchHeader.append(TR)
+			.append(TD).append("Extension: ").append(TD_END)
+			.append(TD).append(searchCriteria.getExtension()).append(TD_END);
+		searchHeader.append(TR_END);
+		
+		searchHeader.append(TR)
+			.append(TD).append("Algorithm: ").append(TD_END)
+			.append(TD).append(searchAlgorithm.getDescription()).append(TD_END);
+		searchHeader.append(TR_END);
+		
+		searchHeader.append(BR);
 		return searchHeader.toString();
 	}
 
 	private String getSearchResults() {
 		StringBuilder searchResults = new StringBuilder();
-		searchResults.append("Results:").append(BR);
+		searchResults.append(BR).append("Results:").append(BR).append(BR);
 		for (File file : searchAlgorithm.run(searchCriteria)) {
 			searchResults.append(file.getAbsolutePath());
 			searchResults.append(BR);
