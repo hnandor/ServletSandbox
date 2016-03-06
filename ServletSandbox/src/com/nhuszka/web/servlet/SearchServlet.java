@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.nhuszka.web.algorithm.SearchAlgorithm;
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
 import com.nhuszka.web.exception.IllegalServletParameterException;
-import com.nhuszka.web.page.ErrorPage;
 import com.nhuszka.web.page.Page;
 import com.nhuszka.web.page.SearchResultPage;
 import com.nhuszka.web.servlet.validator.SearchServletParameterParser;

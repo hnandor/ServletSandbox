@@ -26,6 +26,7 @@ public class StartServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Page searchPage = new SearchPage(parseErrorAttribute(request));
 		response.getWriter().append(searchPage.generateHTML());
+		System.out.println(getServletContext().getServerInfo());
 	}
 	
 	// TODO: validate to not contain script, etc.
