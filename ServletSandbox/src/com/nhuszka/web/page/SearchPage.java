@@ -17,13 +17,16 @@ public class SearchPage extends Page {
 	@Override
 	public String getHTMLBody() {
 		StringBuilder body = new StringBuilder();
+		body.append(DIV_FLUID);
+		body.append(String.format(TITLE, "Search page"));
+		body.append(BR);
 		
 		if (errorMessage != null) {
 			body.append(errorMessage);
 		}
 
 		body.append("<form action='").append("SearchServlet").append("' method='post' >")
-				.append(TABLE);
+				.append(TABLE_STRIPED);
 		
 		body.append(TR).append(TD).append("Keyword:")
 				.append(TD_END)
@@ -58,12 +61,13 @@ public class SearchPage extends Page {
 				.append(TD)
 				.append(TD_END)
 				.append(TD)
-				.append("<input type='submit' value='Search' />")
+				.append("<button type='submit' class='btn btn-default'>Search</button>")
 				.append(TD_END)
 				.append(TR_END)
 				.append(TABLE_END)
 				.append("</form>");
-
+		
+		body.append(DIV_END);
 		return body.toString();
 	}
 

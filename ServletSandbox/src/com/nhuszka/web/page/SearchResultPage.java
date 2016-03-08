@@ -18,10 +18,16 @@ public class SearchResultPage extends Page {
 	@Override
 	public String getHTMLBody() {
 		StringBuilder body = new StringBuilder();
-		body.append(TABLE);
+		body.append(DIV_FLUID);
+		
+		body.append(String.format(TITLE, "Search result page"));
+		
+		body.append(TABLE_STRIPED);
 		body.append(getSearchHeader());
 		body.append(TABLE_END);
 		body.append(getSearchResults());
+		
+		body.append(DIV_END);
 		return body.toString();
 	}
 	
