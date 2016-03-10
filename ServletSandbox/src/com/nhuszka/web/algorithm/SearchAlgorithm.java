@@ -22,6 +22,10 @@ public enum SearchAlgorithm {
 	public String getDescription() {
 		return description;
 	}
+	
+	public String getKey() {
+		return name();
+	}
 
 	@Override
 	public String toString() {

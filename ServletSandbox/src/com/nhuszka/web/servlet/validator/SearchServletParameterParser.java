@@ -13,14 +13,14 @@ public class SearchServletParameterParser {
 	public static String getKeywordParameter(HttpServletRequest request) 
 			throws IllegalServletParameterException {
 		String keyword = request.getParameter(SearchServlet.PARAM_KEYWORD);
-		checkEmpty(keyword, SearchServlet.PARAM_KEYWORD);
+		checkEmpty(keyword, "keyword");
 		return keyword;
 	}
 
 	public static String getRootParameter(HttpServletRequest request) 
 			throws IllegalServletParameterException {
 		String root = request.getParameter(SearchServlet.PARAM_ROOT);
-		checkEmpty(root, SearchServlet.PARAM_ROOT);
+		checkEmpty(root, "directory/file");
 
 		File file = new File(root);
 		if (!file.exists()) {
@@ -32,14 +32,14 @@ public class SearchServletParameterParser {
 	public static String getExtensionParameter(HttpServletRequest request) 
 			throws IllegalServletParameterException {
 		String extension = request.getParameter(SearchServlet.PARAM_EXTENSION);
-		checkEmpty(extension, SearchServlet.PARAM_EXTENSION);
+		checkEmpty(extension, "extension");
 		return extension;
 	}
 
 	public static SearchAlgorithm getSearchAlgorithm(HttpServletRequest request)
 			throws IllegalServletParameterException {
 		String algorithm = request.getParameter(SearchServlet.PARAM_ALGORITHM);
-		checkEmpty(algorithm, SearchServlet.PARAM_ALGORITHM);
+		checkEmpty(algorithm, "algorithm");
 
 		if (!SearchAlgorithm.existsAlgorithm(algorithm)) {
 			throw new IllegalServletParameterException("Error! Algorithm does not exist: " + algorithm);
