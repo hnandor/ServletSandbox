@@ -7,5 +7,5 @@ Repository for self-improvement.
 3. CSS: http://getbootstrap.com/
 
 ## Usage
-JSF user interface: http://{host:port}/servlet/index.xhtml
-JSP user interface: http://{host:port}/servlet/index.html
+1. JSF user interface: http://{host:port}/servlet/index.xhtml
+2. JSP user interface: http://{host:port}/servlet/index.html
