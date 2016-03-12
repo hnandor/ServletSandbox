@@ -6,7 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
+		<link href="resources/css/bootstrap.min.css" rel="stylesheet">
 		<title>Search result</title>
 	</head>
 	<body>
@@ -39,9 +39,7 @@
 			</c:forEach>
 		</div>
 	
-	
-		<script
-			src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" /></script>
-		<script src="js/bootstrap.min.js" /></script>
+		<script src="resources/js/jquery-1.11.3.min.js"></script>
+		<script src="resources/js/bootstrap.min.js"></script>
 	</body>
 </html>
