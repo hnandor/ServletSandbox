@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+		<title>Search Tool JSF</title>
+	</h:head>
+	
+	<h:body>
+		<div class="container-fluid">
+			<h3>Search Tool</h3>
+			<h4>With this tool you can search on your local machine among files</h4>
+			<br/>
+			<h:form>
+				<h:commandButton value="Start" action="search?faces-redirect=true" class="btn btn-default" />
+			</h:form>
+		</div>
+
+		<h:outputScript library="js" name="jquery-1.11.3.min.js" />
+		<h:outputScript library="js" name="bootstrap.min.js" />
+	</h:body>
+	
+</h:html>

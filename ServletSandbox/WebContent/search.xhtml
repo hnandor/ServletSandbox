@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<h:html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<h:outputStylesheet library="css" name="bootstrap.min.css"/>
+		<title>Search JSF</title>
+	</h:head>
+	
+	<h:body>
+		<div class="container-fluid">
+			<h3>Search</h3>
+			<br/>
+			<h:form>
+				<table class="table table-striped">
+					<tr>
+						<td>Keyword</td>
+						<td>
+							<h:inputText id="keyword" required="true" requiredMessage="Keyword is required"
+										 	value="#{searchBean.keyword}"/>
+							<h:outputText value=" "/>
+							<h:message for="keyword" style="color:red" />
+						</td>
+					</tr>
+					<tr>
+						<td>Directory/file</td>
+						<td>
+							<h:inputText id="directoryFile" required="true" requiredMessage="Directory/file is required"
+										 	value="#{searchBean.directoryFile}">
+		          				<f:validator validatorId="directoryFileValidator" />
+							</h:inputText>
+							<h:outputText value=" "/>
+							<h:message for="directoryFile" style="color:red" />
+						</td>
+					</tr>
+					<tr>
+						<td>Extension</td>
+						<td>
+							<h:inputText id="extension" required="true" requiredMessage="Extension is required"
+											value="#{searchBean.extension}"/>
+							<h:outputText value=" "/>
+							<h:message for="extension" style="color:red" />
+						</td>
+					</tr>
+					<tr>
+						<td>Algorithm</td>
+						<td>
+						    <h:selectOneMenu id="algorithmSelector" required="true" requiredMessage="Algorithm is required"
+					    					value="#{searchBean.algorithmName}">
+						        <f:selectItems value="#{searchController.searchAlgorithmSelectorModel}" />
+						        <f:validator validatorId="algorithmSelectorValidator" />
+						    </h:selectOneMenu>
+  							<h:outputText value=" "/>
+						    <h:message for="algorithmSelector" style="color:red" />
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<h:commandButton value="Search" action="searchResult" class="btn btn-default">
+								<f:actionListener type="com.nhuszka.web.jsf.action.SearchSubmitAction" />
+							</h:commandButton>
+						</td>
+					</tr>
+				</table>
+			</h:form>
+		</div>
+
+		<h:outputScript library="js" name="jquery-1.11.3.min.js" />
+		<h:outputScript library="js" name="bootstrap.min.js" />
+	</h:body>
+	
+</h:html>
