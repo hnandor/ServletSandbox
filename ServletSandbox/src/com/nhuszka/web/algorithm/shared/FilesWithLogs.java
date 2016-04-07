@@ -9,7 +9,6 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class FilesWithLogs {
 
 	private final List<File> files;
-	private final ReentrantReadWriteLock lock;
 	private final Lock readLock;
 	private final Lock writeLock;
 	private final List<String> logs;
@@ -21,7 +20,6 @@ public class FilesWithLogs {
 
 	private FilesWithLogs(List<File> files, ReentrantReadWriteLock lock) {
 		this.files = files;
-		this.lock = lock;
 		readLock = lock.readLock();
 		writeLock = lock.writeLock();
 		logs = new ArrayList<>();
