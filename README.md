@@ -5,6 +5,7 @@ Repository for self-improvement.
 1. Servlet
 2. JSP / JSTL / JSF / EL
 3. CSS: http://getbootstrap.com/
+4. JMX
 
 ## Usage
 1. JSF user interface: http://{host:port}/servlet/index.xhtml
