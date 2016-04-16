@@ -6,7 +6,7 @@ import java.util.Collection;
 import com.nhuszka.web.algorithm.recursive_single_thread.FileSearcher;
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
-class StartRecursiveSingleThreadFileSearcher implements FileSearchStarter {
+class StartRecursiveSingleThreadFileSearcher extends FileSearchStarter {
 
 	@Override
 	public Collection<File> run(SearchCriteria searchCriteria) {

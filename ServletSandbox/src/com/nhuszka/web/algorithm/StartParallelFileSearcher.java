@@ -8,7 +8,7 @@ import com.nhuszka.web.algorithm.parallel.GenericFileSearcherTask;
 import com.nhuszka.web.algorithm.shared.FilesWithLogs;
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
-class StartParallelFileSearcher implements FileSearchStarter {
+class StartParallelFileSearcher extends FileSearchStarter {
 
 	@Override
 	public Collection<File> run(SearchCriteria searchCriteria) {

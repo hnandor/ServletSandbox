@@ -8,7 +8,7 @@ import com.nhuszka.web.algorithm.fork_join.SearchFileTask;
 import com.nhuszka.web.algorithm.shared.FilesWithLogs;
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
 
-class StartForkJoinMultiThreadFileSearcher implements FileSearchStarter {
+class StartForkJoinMultiThreadFileSearcher extends FileSearchStarter {
 
 	@Override
 	public Collection<File> run(SearchCriteria searchCriteria) {
