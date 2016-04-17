@@ -21,6 +21,7 @@ public class SearchSubmitAction implements ActionListener {
 		searchBean.setAlgorithmDescription(algorithm.getDescription());
 
 		// We could get the results from the controller in searchResult.xhtml
+		// Currently not used
 		Collection<String> searchResults = new SearchTask().computeSearchResults(searchBean);
 		searchBean.setSearchResults(searchResults);
 	}
