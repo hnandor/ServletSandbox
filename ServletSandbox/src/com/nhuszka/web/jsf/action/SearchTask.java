@@ -26,7 +26,7 @@ public class SearchTask {
 
 	private Collection<String> listFilePaths(SearchAlgorithm algorithm, SearchCriteria criteria) {
 		final Function<? super File, ? extends String> filePathMapper = (file) -> file.getAbsolutePath();
-		return algorithm.run(criteria)
+		return algorithm.performSearchWithPersist(criteria)
 				.stream()
 				.map(filePathMapper)
 				.collect(Collectors.toList());

@@ -4,12 +4,12 @@ import java.io.File;
 import java.util.Collection;
 
 import com.nhuszka.web.algorithm.shared.SearchCriteria;
-import com.nhuszka.web.database.SQLiteDBInterface;
+import com.nhuszka.web.database.DatabaseOperationService;
 
 public abstract class FileSearchStarter {
 	
 	public Collection<File> performSearchWithPersist(SearchCriteria searchCriteria) {
-		new SQLiteDBInterface().saveSearchHistory(searchCriteria);
+		DatabaseOperationService.saveSearchHistory(searchCriteria);
 		return run(searchCriteria);
 	}
 	

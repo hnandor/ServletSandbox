@@ -35,7 +35,7 @@ public class SearchServlet extends HttpServlet {
 			
 			request.setAttribute("criteria", searchCriteria);
 			request.setAttribute("algorithm", searchAlgorithm.getDescription());
-			request.setAttribute("filePaths", searchAlgorithm.run(searchCriteria));
+			request.setAttribute("filePaths", searchAlgorithm.performSearchWithPersist(searchCriteria));
 			request.getRequestDispatcher(PagePath.SEARCH_RESULT_PAGE).include(request, response);
 		} catch (IllegalServletParameterException ispe) {
 			request.setAttribute(StartServlet.ERROR_MSG, ispe.getMessage());

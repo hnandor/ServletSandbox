@@ -41,7 +41,7 @@ public enum SearchAlgorithm {
 		return false;
 	}
 
-	public Collection<File> run(SearchCriteria searchCriteria) {
+	public Collection<File> performSearchWithPersist(SearchCriteria searchCriteria) {
 		return searchStarter.performSearchWithPersist(searchCriteria);
 	}
 }
