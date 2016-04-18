@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ListSearchHistoryDBCommand implements DBCommand {
+public class ListSearchHistoryDBCommand implements SQLiteDBCommand {
 	
 	private static final String LIST_ALL_SEARCH_HISTORY = "SELECT * FROM search_history";
 

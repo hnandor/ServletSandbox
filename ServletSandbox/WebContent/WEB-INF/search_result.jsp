@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>Algorithm</td>
-					<td>${requestScope.algorithm}</td>
+					<td>${requestScope.criteria.algorithm.description}</td>
 				</tr>
 			</table>
 			

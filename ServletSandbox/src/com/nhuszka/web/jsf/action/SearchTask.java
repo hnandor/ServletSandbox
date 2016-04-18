@@ -12,21 +12,19 @@ import com.nhuszka.web.jsf.bean.SearchBean;
 public class SearchTask {
 	
 	public Collection<String> computeSearchResults(SearchBean searchBean) {
-		SearchCriteria criteria = convertToSearchCriteria(searchBean);
 		SearchAlgorithm algorithm = SearchAlgorithm.valueOf(searchBean.getAlgorithmName());
+		SearchCriteria criteria = convertToSearchCriteria(searchBean, algorithm);
 		
-		return listFilePaths(algorithm, criteria);
+		return listFilePaths(criteria);
 	}
 	
-	private SearchCriteria convertToSearchCriteria(SearchBean searchBean) {
-		SearchCriteria criteria = new SearchCriteria(
-				searchBean.getDirectoryFile(), searchBean.getKeyword(), searchBean.getExtension());
-		return criteria;
+	private SearchCriteria convertToSearchCriteria(SearchBean searchBean, SearchAlgorithm algorithm) {
+		return new SearchCriteria(searchBean.getDirectoryFile(), searchBean.getKeyword(), searchBean.getExtension(), algorithm);
 	}
 
-	private Collection<String> listFilePaths(SearchAlgorithm algorithm, SearchCriteria criteria) {
+	private Collection<String> listFilePaths(SearchCriteria criteria) {
 		final Function<? super File, ? extends String> filePathMapper = (file) -> file.getAbsolutePath();
-		return algorithm.performSearchWithPersist(criteria)
+		return criteria.getAlgorithm().performSearchWithPersist(criteria)
 				.stream()
 				.map(filePathMapper)
 				.collect(Collectors.toList());

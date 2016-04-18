@@ -6,14 +6,14 @@ import java.sql.SQLException;
 
 import org.sqlite.JDBC;
 
-import com.nhuszka.web.database.command.DBCommand;
+import com.nhuszka.web.database.command.SQLiteDBCommand;
 
-public class SQLiteDBCommandInterface {
+public class SQLiteDBCommandRunner {
 
 	private static final String DB_PATH = "d:/Prog/sqlite/servletSandbox.db";
 	private static final String SQLITE_DB_URL = "jdbc:sqlite:" + DB_PATH;
 
-	static void performDBCommand(DBCommand command) {
+	static void performDBCommand(SQLiteDBCommand command) {
 		try {
 			DriverManager.registerDriver(new JDBC());
 			try (Connection connection = DriverManager.getConnection(SQLITE_DB_URL)) {

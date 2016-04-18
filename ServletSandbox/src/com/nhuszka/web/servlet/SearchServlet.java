@@ -29,12 +29,10 @@ public class SearchServlet extends HttpServlet {
 			String keyword = SearchServletParameterParser.getKeywordParameter(request);
 			String root = SearchServletParameterParser.getRootParameter(request);
 			String extension = SearchServletParameterParser.getExtensionParameter(request);
-			SearchCriteria searchCriteria = new SearchCriteria(root, keyword, extension);
-
 			SearchAlgorithm searchAlgorithm = SearchServletParameterParser.getSearchAlgorithm(request);			
 			
+			SearchCriteria searchCriteria = new SearchCriteria(root, keyword, extension, searchAlgorithm);
 			request.setAttribute("criteria", searchCriteria);
-			request.setAttribute("algorithm", searchAlgorithm.getDescription());
 			request.setAttribute("filePaths", searchAlgorithm.performSearchWithPersist(searchCriteria));
 			request.getRequestDispatcher(PagePath.SEARCH_RESULT_PAGE).include(request, response);
 		} catch (IllegalServletParameterException ispe) {
