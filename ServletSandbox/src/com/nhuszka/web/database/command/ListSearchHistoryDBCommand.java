@@ -10,14 +10,14 @@ public class ListSearchHistoryDBCommand implements SQLiteDBCommand {
 	private static final String LIST_ALL_SEARCH_HISTORY = "SELECT * FROM search_history";
 
 	@Override
-	public void perform(Connection connection) throws SQLException {
-		Statement stmt = connection.createStatement();
-
-		ResultSet resultSet = stmt.executeQuery(LIST_ALL_SEARCH_HISTORY);
-		while (resultSet.next()) {
-			printSearchHistoryRecord(resultSet);
+	public void perform(Connection connection) throws SQLException  {
+		try (Statement stmt = connection.createStatement()) {
+			ResultSet resultSet = stmt.executeQuery(LIST_ALL_SEARCH_HISTORY);
+			while (resultSet.next()) {
+				printSearchHistoryRecord(resultSet);
+			}
+			resultSet.close();
 		}
-		resultSet.close();
 	}
 
 	private void printSearchHistoryRecord(ResultSet rs) throws SQLException {

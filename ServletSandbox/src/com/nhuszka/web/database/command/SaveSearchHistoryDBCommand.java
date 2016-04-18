@@ -18,13 +18,13 @@ public class SaveSearchHistoryDBCommand implements SQLiteDBCommand {
 
 	@Override
 	public void perform(Connection connection) throws SQLException {
-		PreparedStatement stmt = connection.prepareStatement(SAVE_SEARCH_HISTORY);
+		try (PreparedStatement stmt = connection.prepareStatement(SAVE_SEARCH_HISTORY)) {
+			stmt.setString(1, searchCriteria.getKeyword());
+			stmt.setString(2, searchCriteria.getRoot());
+			stmt.setString(3, searchCriteria.getExtension());
+			stmt.setString(4, searchCriteria.getAlgorithm().getKey());
 
-		stmt.setString(1, searchCriteria.getKeyword());
-		stmt.setString(2, searchCriteria.getRoot());
-		stmt.setString(3, searchCriteria.getExtension());
-		stmt.setString(4, searchCriteria.getAlgorithm().getKey());
-
-		stmt.executeUpdate();
+			stmt.executeUpdate();
+		}
 	}
 }
