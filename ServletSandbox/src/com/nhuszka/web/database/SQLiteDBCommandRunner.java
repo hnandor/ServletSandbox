@@ -7,21 +7,26 @@ import java.sql.SQLException;
 import org.sqlite.JDBC;
 
 import com.nhuszka.web.database.command.SQLiteDBCommand;
+import com.nhuszka.web.properties.PropertyReader;
 
 public class SQLiteDBCommandRunner {
 
-	private static final String DB_PATH = "d:/Prog/sqlite/servletSandbox.db";
-	private static final String SQLITE_DB_URL = "jdbc:sqlite:" + DB_PATH;
+	private static final String SQLITE_DB_URL_PREFIX = "jdbc:sqlite:";
 
 	static void performDBCommand(SQLiteDBCommand command) {
-		try {
-			DriverManager.registerDriver(new JDBC());
-			try (Connection connection = DriverManager.getConnection(SQLITE_DB_URL)) {
-				command.perform(connection);
-			}
+		try (Connection connection = getConnection()) {
+			command.perform(connection);
 		} catch (SQLException ex) {
 			printSQLException(ex);
 		}
+	}
+
+	private static Connection getConnection() throws SQLException {
+		DriverManager.registerDriver(new JDBC());
+
+		PropertyReader properties = new PropertyReader();
+		String dbURL =  SQLITE_DB_URL_PREFIX + properties.readDatabaseURL();
+		return DriverManager.getConnection(dbURL);
 	}
 
 	public static void printSQLException(SQLException ex) {
